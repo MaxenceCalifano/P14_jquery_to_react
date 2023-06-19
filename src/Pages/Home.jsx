@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import '../css/home.module.css'
+
+import { Modal } from "my-modal-maxencec"
+import "my-modal-maxencec/dist/style.css"
+import { useState } from "react";
 function Home() {
+
+    const [isOpen, setIsOpen] = useState(false)
     return (
         <div>
             <h1>HRnet</h1>
@@ -46,6 +52,7 @@ function Home() {
                         <option>Legal</option>
                     </select>
                 </form>
+                <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
 
             </main>
         </div>
