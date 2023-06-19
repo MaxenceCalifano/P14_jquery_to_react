@@ -7,6 +7,34 @@ import { useState } from "react";
 function Home() {
 
     const [isOpen, setIsOpen] = useState(false)
+    const [firstName, setFirstName] = useState()
+    const [lastName, setLastName] = useState()
+    const [dateOfBirth, setDateOfBirth] = useState()
+    const [startDate, setStartDate] = useState()
+    const [street, setStreet] = useState()
+    const [city, setCity] = useState()
+    const [state, setState] = useState()
+    const [zipCode, setZipCode] = useState()
+    const [department, setDepartment] = useState()
+
+    const saveEmployee = () => {
+
+        const employees = JSON.parse(localStorage.getItem('employees')) || [];
+        const employee = {
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            startDate: startDate,
+            department: department,
+            street: street,
+            city: city,
+            state: state,
+            zipCode: zipCode
+        };
+        employees.push(employee);
+        localStorage.setItem('employees', JSON.stringify(employees));
+        setIsOpen(true)
+    }
     return (
         <div>
             <h1>HRnet</h1>
@@ -16,13 +44,13 @@ function Home() {
                 <form>
 
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" />
+                    <input onChange={e => setFirstName(e.target.value)} type="text" id="first-name" />
 
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" />
+                    <input onChange={e => setLastName(e.target.value)} type="text" id="last-name" />
 
                     <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input id="date-of-birth" type="text" />
+                    <input onChange={e => setDateOfBirth(e.target.value)} id="date-of-birth" type="text" />
 
                     <label htmlFor="start-date">Start Date</label>
                     <input id="start-date" type="text" />
@@ -31,20 +59,20 @@ function Home() {
                         <legend>Address</legend>
 
                         <label htmlFor="street">Street</label>
-                        <input id="street" type="text" />
+                        <input onChange={e => setStreet(e.target.value)} id="street" type="text" />
 
                         <label htmlFor="city">City</label>
-                        <input id="city" type="text" />
+                        <input onChange={e => setCity(e.target.value)} id="city" type="text" />
 
                         <label htmlFor="state">State</label>
                         <select name="state" id="state"></select>
 
                         <label htmlFor="zip-code">Zip Code</label>
-                        <input id="zip-code" type="number" />
+                        <input onChange={e => setZipCode(e.target.value)} id="zip-code" type="number" />
                     </fieldset>
 
                     <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
+                    <select onChange={e => setDepartment(e.target.value)} name="department" id="department">
                         <option>Sales</option>
                         <option>Marketing</option>
                         <option>Engineering</option>
@@ -52,6 +80,7 @@ function Home() {
                         <option>Legal</option>
                     </select>
                 </form>
+                <button onClick={saveEmployee}>Save</button>
                 <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
 
             </main>

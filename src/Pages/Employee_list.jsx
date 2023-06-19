@@ -1,6 +1,10 @@
 function EmployeeList() {
     return (
-        <>employee list</>
+        <>
+            <h1>
+                Current Employees
+            </h1>
+        </>
     );
 }
 
