@@ -16,7 +16,17 @@ function EmployeeList() {
             <h1>
                 Current Employees
             </h1>
-            <EmployeeTable data={data} columns={["First Name", "Last Name", "Start Date", "Department", "Date of Birth", "Street", "City", "State", "Zip Code"]} />
+            <EmployeeTable data={data} columns={[
+                { title: "First Name", data: "firstName" },
+                { title: "Last Name", data: "lastName" },
+                { title: "Start Date", data: "startDate" },
+                { title: "Department", data: "department" },
+                { title: "Date of Birth", data: "dateOfBirth" },
+                { title: "Street", data: "street" },
+                { title: "City", data: "city" },
+                { title: "State", data: "state" },
+                { title: "Zip Code", data: "zipCode" }
+            ]} />
         </>
     );
 }

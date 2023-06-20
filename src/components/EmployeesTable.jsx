@@ -33,7 +33,7 @@ function EmployeeTable({ data, columns }) {
                         <thead>
                             <tr>
 
-                                {columns.map((col, index) => <th key={index}>{col}<FaSort style={{ color: "grey" }} /></th>)}
+                                {columns.map((col, index) => <th key={index}>{col.title}<FaSort style={{ color: "grey" }} /></th>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@ function EmployeeTable({ data, columns }) {
                                     <tr key={index}>
                                         {
                                             // Create a column for each value in item
-                                            Object.values(row).map((column, index) => <td key={index}>{column}</td>)
+                                            columns.map((column, index) => <td key={index}>{row[column.data]}</td>)
                                         }
                                     </tr>
                                 ))
