@@ -7,7 +7,7 @@ function EmployeeTable({ data, columns }) {
 
     useEffect(() => setEmployees(data), [data])
 
-    const searchEmployee = (e) => {
+    const search = (e) => {
         const userInput = e.target.value
         if (userInput.length === 0) setEmployees(data)
         if (userInput.length < 3) return
@@ -27,7 +27,7 @@ function EmployeeTable({ data, columns }) {
                         <label>
                             Search:
                         </label>
-                        <input onChange={searchEmployee} type='search' />
+                        <input onChange={search} type='search' />
                     </div>
                     <table>
                         <thead>
@@ -38,17 +38,13 @@ function EmployeeTable({ data, columns }) {
                         </thead>
                         <tbody>
                             {
+                                //  Create a row for each item in data
                                 employees.map((row, index) => (
                                     <tr key={index}>
-                                        <td>{row.firstName}</td>
-                                        <td>{row.lastName}</td>
-                                        <td>{row.startDate}</td>
-                                        <td>{row.department}</td>
-                                        <td>{row.dateOfBirth}</td>
-                                        <td>{row.street}</td>
-                                        <td>{row.city}</td>
-                                        <td>{row.state}</td>
-                                        <td>{row.zipCode}</td>
+                                        {
+                                            // Create a column for each value in item
+                                            Object.values(row).map((column, index) => <td key={index}>{column}</td>)
+                                        }
                                     </tr>
                                 ))
                             }
