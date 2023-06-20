@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 function EmployeeTable({ columns }) {
     return (<>
         {/* 
@@ -17,6 +18,10 @@ function EmployeeTable({ columns }) {
             </tbody>
         </table>
     </>);
+}
+
+EmployeeTable.propTypes = {
+    columns: PropTypes.array
 }
 
 export default EmployeeTable;
