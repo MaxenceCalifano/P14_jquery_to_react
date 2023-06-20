@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { FaSort } from 'react-icons/fa'
 import styles from "../css/EmployeesTable.module.css"
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
@@ -8,7 +9,8 @@ function EmployeeTable({ data, columns }) {
 
     const searchEmployee = (e) => {
         const userInput = e.target.value
-        if (userInput < 2) return
+        if (userInput.length === 0) setEmployees(data)
+        if (userInput.length < 3) return
 
         const filteredEmployees = employees.filter(employee => {
             if (Object.values(employee).some(elem => elem.includes(userInput))) return true
@@ -31,7 +33,7 @@ function EmployeeTable({ data, columns }) {
                         <thead>
                             <tr>
 
-                                {columns.map((col, index) => <th key={index}>{col}</th>)}
+                                {columns.map((col, index) => <th key={index}>{col}<FaSort style={{ color: "grey" }} /></th>)}
                             </tr>
                         </thead>
                         <tbody>
