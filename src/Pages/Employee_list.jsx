@@ -7,7 +7,7 @@ function EmployeeList() {
     const [data, setData] = useState()
 
     useEffect(() => {
-        const localStorageData = localStorage.getItem('employees')
+        const localStorageData = JSON.parse(localStorage.getItem('employees'))
         setData(localStorageData)
     }, [])
 
@@ -16,7 +16,7 @@ function EmployeeList() {
             <h1>
                 Current Employees
             </h1>
-            <EmployeeTable data={data} columns={["coucou", "test", "ici", "là"]} />
+            <EmployeeTable data={data} columns={["First Name", "Last Name", "Start Date", "Department", "Date of Birth", "Street", "City", "State", "Zip Code"]} />
         </>
     );
 }
