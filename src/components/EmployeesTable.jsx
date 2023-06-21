@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FaSort } from 'react-icons/fa'
+import { FaSort, FaSortDown } from 'react-icons/fa'
 import styles from "../css/EmployeesTable.module.css"
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
+    const [selectedColumn, setSelectedColumn] = useState(0)
 
     useEffect(() => setEmployees(data), [data])
 
@@ -16,6 +17,45 @@ function EmployeeTable({ data, columns }) {
             if (Object.values(employee).some(elem => elem.includes(userInput))) return true
         })
         setEmployees(filteredEmployees)
+    }
+
+    /* 
+        @param number
+    */
+    function sort(columnIndex) {
+        // save which column is selected, so the others are unselected
+        setSelectedColumn(columnIndex)
+        // sort les row basé sur la colonne séléctionné
+        const data = employees
+
+        data.sort((a, b) => {
+            if (a[columns[columnIndex].data] < b[columns[columnIndex].data])
+                return -1
+            if (a[columns[columnIndex].data] > b[columns[columnIndex].data])
+                return 1
+        })
+        setEmployees(data)
+        console.log("🚀 ~ file: EmployeesTable.jsx:36 ~ sort ~ data:", data)
+    }
+
+    // Table header cell component
+    const TableHeader = ({ title, index, selectedColumn }) => {
+
+        const [isSelected, setIsSelected] = useState()
+
+        useEffect(() => {
+            index === selectedColumn ? setIsSelected(true) : setIsSelected(false)
+        }, [setIsSelected, index, selectedColumn])
+        // est séléctionné ?
+        // est ascendant ?
+        // ou descendant ?
+        return (
+            <th>
+                {title}
+                {isSelected ? <FaSortDown onClick={() => sort(index)} />
+                    : <FaSort onClick={() => sort(index)} style={{ color: "grey" }} />}
+            </th>
+        )
     }
 
     return (<>
@@ -33,7 +73,10 @@ function EmployeeTable({ data, columns }) {
                         <thead>
                             <tr>
 
-                                {columns.map((col, index) => <th key={index}>{col.title}<FaSort style={{ color: "grey" }} /></th>)}
+                                {columns.map((col, index) => <TableHeader key={index} title={col.title} index={index} selectedColumn={selectedColumn} />)
+                                    // au clique déclencher la fonction sort en lui passant l'index de la column cliqué
+                                    // ainsi dans la fonction on veut savoir quelle données trier
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -53,14 +96,15 @@ function EmployeeTable({ data, columns }) {
                 </>
                 : <></>
         }
-
-
     </>);
 }
 
 EmployeeTable.propTypes = {
     data: PropTypes.array,
-    columns: PropTypes.array
+    columns: PropTypes.array,
+    title: PropTypes.string,
+    index: PropTypes.number,
+    selectedColumn: PropTypes.number
 }
 
 export default EmployeeTable;
