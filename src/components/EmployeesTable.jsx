@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FaSort, FaSortDown } from 'react-icons/fa'
+import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import styles from "../css/EmployeesTable.module.css"
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
@@ -19,9 +19,10 @@ function EmployeeTable({ data, columns }) {
         setEmployees(filteredEmployees)
     }
 
-    /* 
-        @param number
-    */
+    /**
+     * 
+     * @param {number} columnIndex 
+     */
     function sort(columnIndex) {
         // save which column is selected, so the others are unselected
         setSelectedColumn(columnIndex)
@@ -42,18 +43,41 @@ function EmployeeTable({ data, columns }) {
     const TableHeader = ({ title, index, selectedColumn }) => {
 
         const [isSelected, setIsSelected] = useState()
+        const [ascending, setAscending] = useState(false)
 
         useEffect(() => {
-            index === selectedColumn ? setIsSelected(true) : setIsSelected(false)
+            //    index === selectedColumn ?  setIsSelected(true) : setIsSelected(false)
+            if (index === selectedColumn) {
+                setIsSelected(true)
+
+                /*   // change the sort order
+                  if (descending === true) {
+                      setDescending(false)
+                      setAscending(true)
+                  } else {
+                      setDescending(true)
+                      setAscending(false)
+                  } */
+            }
         }, [setIsSelected, index, selectedColumn])
-        // est séléctionné ?
-        // est ascendant ?
-        // ou descendant ?
+
         return (
             <th>
                 {title}
-                {isSelected ? <FaSortDown onClick={() => sort(index)} />
-                    : <FaSort onClick={() => sort(index)} style={{ color: "grey" }} />}
+                {isSelected ?
+                    ascending ? <FaSortUp onClick={() => {
+                        setAscending(false)
+                        sort(index)
+                    }} />
+                        : <FaSortDown onClick={() => {
+                            setAscending(true)
+                            sort(index)
+                        }} />
+                    : <FaSort onClick={() => {
+                        setIsSelected(true)
+                        setAscending(false)
+                        sort(index)
+                    }} style={{ color: "grey" }} />}
             </th>
         )
     }
