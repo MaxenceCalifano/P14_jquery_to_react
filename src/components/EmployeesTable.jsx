@@ -4,7 +4,7 @@ import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import styles from "../css/EmployeesTable.module.css"
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
-    const [selectedColumn, setSelectedColumn] = useState(0)
+    const [selectedColumn, setSelectedColumn] = useState()
 
     useEffect(() => setEmployees(data), [data])
 
@@ -23,60 +23,68 @@ function EmployeeTable({ data, columns }) {
      * 
      * @param {number} columnIndex 
      */
-    function sort(columnIndex) {
+    function sort(columnIndex, ascending) {
         // save which column is selected, so the others are unselected
         setSelectedColumn(columnIndex)
         // sort les row basé sur la colonne séléctionné
-        const data = employees
+        const data = [...employees]
 
+        console.log(ascending)
         data.sort((a, b) => {
-            if (a[columns[columnIndex].data] < b[columns[columnIndex].data])
-                return -1
-            if (a[columns[columnIndex].data] > b[columns[columnIndex].data])
-                return 1
+            if (ascending === true) {
+                if (a[columns[columnIndex].data].toLowerCase() < b[columns[columnIndex].data].toLowerCase())
+                    return -1
+                if (a[columns[columnIndex].data].toLowerCase() > b[columns[columnIndex].data].toLowerCase())
+                    return 1
+            }
+
+            if (ascending === false) {
+                if (a[columns[columnIndex].data].toLowerCase() > b[columns[columnIndex].data].toLowerCase())
+                    return -1
+                if (a[columns[columnIndex].data].toLowerCase() < b[columns[columnIndex].data].toLowerCase())
+                    return 1
+            }
+
         })
+
         setEmployees(data)
+        console.log('test', data[0][columns[columnIndex].data])
+        console.log('test', data[1][columns[columnIndex].data])
+        //console.log('test', data[2][columns[columnIndex].data])
         console.log("🚀 ~ file: EmployeesTable.jsx:36 ~ sort ~ data:", data)
     }
 
     // Table header cell component
     const TableHeader = ({ title, index, selectedColumn }) => {
 
-        const [isSelected, setIsSelected] = useState()
+        const [isSelected, setIsSelected] = useState(false)
         const [ascending, setAscending] = useState(false)
 
         useEffect(() => {
-            //    index === selectedColumn ?  setIsSelected(true) : setIsSelected(false)
             if (index === selectedColumn) {
                 setIsSelected(true)
-
-                /*   // change the sort order
-                  if (descending === true) {
-                      setDescending(false)
-                      setAscending(true)
-                  } else {
-                      setDescending(true)
-                      setAscending(false)
-                  } */
             }
-        }, [setIsSelected, index, selectedColumn])
+        }, [index, selectedColumn])
 
         return (
             <th>
                 {title}
                 {isSelected ?
-                    ascending ? <FaSortUp onClick={() => {
-                        setAscending(false)
-                        sort(index)
-                    }} />
-                        : <FaSortDown onClick={() => {
-                            setAscending(true)
-                            sort(index)
+                    ascending ?
+                        // Will display a down arrow
+                        <FaSortUp onClick={() => {
+                            sort(index, ascending)
+                            setAscending(false)
                         }} />
+                        //Will display an up arrow
+                        : <FaSortDown onClick={() => {
+                            sort(index, ascending)
+                            setAscending(true)
+                        }} />
+                    // Will grey up and down arrow
                     : <FaSort onClick={() => {
-                        setIsSelected(true)
+                        sort(index, ascending)
                         setAscending(false)
-                        sort(index)
                     }} style={{ color: "grey" }} />}
             </th>
         )
