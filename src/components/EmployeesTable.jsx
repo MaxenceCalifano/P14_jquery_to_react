@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import styles from "../css/EmployeesTable.module.css"
+import TableHeader from './TableHeader';
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
     const [selectedColumn, setSelectedColumn] = useState()
@@ -19,77 +19,6 @@ function EmployeeTable({ data, columns }) {
         setEmployees(filteredEmployees)
     }
 
-    /**
-     * 
-     * @param {number} columnIndex 
-     */
-    function sort(columnIndex, ascending) {
-        // save which column is selected, so the others are unselected
-        setSelectedColumn(columnIndex)
-        // sort les row basé sur la colonne séléctionné
-        const data = [...employees]
-
-        console.log(ascending)
-        data.sort((a, b) => {
-            if (ascending === true) {
-                if (a[columns[columnIndex].data].toLowerCase() < b[columns[columnIndex].data].toLowerCase())
-                    return -1
-                if (a[columns[columnIndex].data].toLowerCase() > b[columns[columnIndex].data].toLowerCase())
-                    return 1
-            }
-
-            if (ascending === false) {
-                if (a[columns[columnIndex].data].toLowerCase() > b[columns[columnIndex].data].toLowerCase())
-                    return -1
-                if (a[columns[columnIndex].data].toLowerCase() < b[columns[columnIndex].data].toLowerCase())
-                    return 1
-            }
-
-        })
-
-        setEmployees(data)
-        console.log('test', data[0][columns[columnIndex].data])
-        console.log('test', data[1][columns[columnIndex].data])
-        //console.log('test', data[2][columns[columnIndex].data])
-        console.log("🚀 ~ file: EmployeesTable.jsx:36 ~ sort ~ data:", data)
-    }
-
-    // Table header cell component
-    const TableHeader = ({ title, index, selectedColumn }) => {
-
-        const [isSelected, setIsSelected] = useState(false)
-        const [ascending, setAscending] = useState(false)
-
-        useEffect(() => {
-            if (index === selectedColumn) {
-                setIsSelected(true)
-            }
-        }, [index, selectedColumn])
-
-        return (
-            <th>
-                {title}
-                {isSelected ?
-                    ascending ?
-                        // Will display a down arrow
-                        <FaSortUp onClick={() => {
-                            sort(index, ascending)
-                            setAscending(false)
-                        }} />
-                        //Will display an up arrow
-                        : <FaSortDown onClick={() => {
-                            sort(index, ascending)
-                            setAscending(true)
-                        }} />
-                    // Will grey up and down arrow
-                    : <FaSort onClick={() => {
-                        sort(index, ascending)
-                        setAscending(false)
-                    }} style={{ color: "grey" }} />}
-            </th>
-        )
-    }
-
     return (<>
 
         {
@@ -105,7 +34,14 @@ function EmployeeTable({ data, columns }) {
                         <thead>
                             <tr>
 
-                                {columns.map((col, index) => <TableHeader key={index} title={col.title} index={index} selectedColumn={selectedColumn} />)
+                                {columns.map((col, index) => <TableHeader key={index}
+                                    title={col.title}
+                                    index={index}
+                                    selectedColumn={selectedColumn}
+                                    setSelectedColumn={setSelectedColumn}
+                                    setEmployees={setEmployees}
+                                    employees={employees}
+                                    columns={columns} />)
                                     // au clique déclencher la fonction sort en lui passant l'index de la column cliqué
                                     // ainsi dans la fonction on veut savoir quelle données trier
                                 }
