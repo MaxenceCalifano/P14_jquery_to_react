@@ -24,16 +24,32 @@ function EmployeeTable({ data, columns }) {
         {
             employees ?
                 <>
-                    <div className={styles.search}>
-                        <label>
-                            Search:
-                        </label>
-                        <input onChange={search} type='search' />
+                    <div className={styles.searchAndDataLength}>
+                        {/* Select number of entries*/}
+                        <div className={styles.flexDiv}>
+                            <label>Show</label>
+                            <select name='data-length'>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
+
+
+                        {/* Search input */}
+                        <div className={styles.flexDiv}>
+                            <label>
+                                Search:
+                            </label>
+                            <input onChange={search} type='search' />
+                        </div>
+
                     </div>
                     <table>
                         <thead>
                             <tr>
-
                                 {columns.map((col, index) => <TableHeader key={index}
                                     title={col.title}
                                     index={index}

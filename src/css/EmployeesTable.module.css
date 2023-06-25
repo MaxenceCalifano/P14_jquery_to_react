@@ -3,7 +3,14 @@ th {
     padding: 10px 5px;
 }
 
-.search {
+.searchAndDataLength {
     display: flex;
     gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flexDiv {
+    display: flex;
+    gap: 5px;
 }
