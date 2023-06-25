@@ -5,8 +5,9 @@ import TableHeader from './TableHeader';
 function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
     const [selectedColumn, setSelectedColumn] = useState()
+    const [dataLength, setDataLength] = useState(10)
 
-    useEffect(() => setEmployees(data), [data])
+    useEffect(() => setEmployees(data.slice(0, dataLength)), [data, dataLength])
 
     const search = (e) => {
         const userInput = e.target.value
@@ -19,6 +20,12 @@ function EmployeeTable({ data, columns }) {
         setEmployees(filteredEmployees)
     }
 
+    const selectLength = (e) => {
+        const selectedValue = e.target.value
+        setDataLength(selectedValue)
+
+    }
+
     return (<>
 
         {
@@ -28,7 +35,7 @@ function EmployeeTable({ data, columns }) {
                         {/* Select number of entries*/}
                         <div className={styles.flexDiv}>
                             <label>Show</label>
-                            <select name='data-length'>
+                            <select onChange={selectLength} name='data-length'>
                                 <option value="10">10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
