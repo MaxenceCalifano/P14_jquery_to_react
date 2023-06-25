@@ -19,7 +19,7 @@ function TableHeader({ title,
     function sort(columnIndex, ascending) {
         // save which column is selected, so the others are unselected
         setSelectedColumn(columnIndex)
-        // sort les row basé sur la colonne séléctionné
+        // Create a copy of the state to work on it, so react will notice that the object has changed
         const data = [...employees]
 
         console.log(ascending)
@@ -61,7 +61,7 @@ function TableHeader({ title,
                         sort(index, !ascending)
                         setAscending(true)
                     }} />
-                // Will grey up and down arrow
+                // Will display grey up and down arrow
                 : <FaSort onClick={() => {
                     sort(index, ascending)
                     setAscending(false)
