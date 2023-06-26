@@ -6,7 +6,7 @@ function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
     const [selectedColumn, setSelectedColumn] = useState()
     const [dataLength, setDataLength] = useState(10)
-    const [pagination, setPagination] = useState(1)
+    const [pagination, setPagination] = useState(0)
     const [numberOfPages, setNumberOfPages] = useState(1)
 
     useEffect(() => {
@@ -34,8 +34,6 @@ function EmployeeTable({ data, columns }) {
         setDataLength(selectedValue)
 
     }
-
-
 
     return (<>
 
@@ -96,9 +94,27 @@ function EmployeeTable({ data, columns }) {
                         </tbody>
                     </table>
                     <div>
-                        <p>showing { } to </p>
+                        <p>showing {pagination * dataLength + 1} to {pagination + 1 === numberOfPages.length ? data.length : parseInt(pagination * dataLength) + parseInt(dataLength)} of {data.length}</p>
                         {
-                            numberOfPages.map((page, key) => <button key={key}>{key + 1}</button>)
+                            numberOfPages.length > 1 ?
+                                numberOfPages.map((page, key) => <button onClick={() => {
+                                    console.log(data.slice(key * dataLength, key * dataLength))
+                                    console.log(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength))
+                                    setPagination(key)
+                                    setEmployees(data.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
+                                    // En fonction de la page où on se trouve, on veut employees avec la longueur de data length
+                                    /**
+                                     * pour 25
+                                     * p1 1 à 25
+                                     * p2 26 à 50
+                                     * P3 51 à
+                                     * 
+                                     * pour 50 
+                                     * 1 à 50
+                                     * 51 à 100
+                                     */
+                                }} key={key}>{key + 1}</button>)
+                                : <></>
                         }
                     </div>
                 </>
