@@ -6,9 +6,16 @@ function EmployeeTable({ data, columns }) {
     const [employees, setEmployees] = useState()
     const [selectedColumn, setSelectedColumn] = useState()
     const [dataLength, setDataLength] = useState(10)
+    const [pagination, setPagination] = useState(1)
+    const [numberOfPages, setNumberOfPages] = useState(1)
 
     useEffect(() => {
-        if (data) setEmployees(data.slice(0, dataLength))
+        if (data) {
+            setEmployees(data.slice(0, dataLength))
+
+            // Build an array of number of pages length so we can map on it to create the pagination buttons
+            setNumberOfPages(Array.from({ length: Math.ceil(data.length / dataLength) }))
+        }
     }, [data, dataLength])
 
     const search = (e) => {
@@ -27,6 +34,8 @@ function EmployeeTable({ data, columns }) {
         setDataLength(selectedValue)
 
     }
+
+
 
     return (<>
 
@@ -88,6 +97,9 @@ function EmployeeTable({ data, columns }) {
                     </table>
                     <div>
                         <p>showing { } to </p>
+                        {
+                            numberOfPages.map((page, key) => <button key={key}>{key + 1}</button>)
+                        }
                     </div>
                 </>
                 : <></>
