@@ -7,7 +7,9 @@ function EmployeeTable({ data, columns }) {
     const [selectedColumn, setSelectedColumn] = useState()
     const [dataLength, setDataLength] = useState(10)
 
-    useEffect(() => setEmployees(data.slice(0, dataLength)), [data, dataLength])
+    useEffect(() => {
+        if (data) setEmployees(data.slice(0, dataLength))
+    }, [data, dataLength])
 
     const search = (e) => {
         const userInput = e.target.value
@@ -84,6 +86,9 @@ function EmployeeTable({ data, columns }) {
                             }
                         </tbody>
                     </table>
+                    <div>
+                        <p>showing { } to </p>
+                    </div>
                 </>
                 : <></>
         }
