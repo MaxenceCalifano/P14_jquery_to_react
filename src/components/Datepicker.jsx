@@ -28,8 +28,7 @@ function Datepicker() {
         console.log("🚀 ~ file: Datepicker.jsx:20 ~ useEffect ~ cellsToAdd:", cellsToAdd)
 
 
-        // Ici je voudrais récuperer le nombre de jours qu'il y a entre le premier jour du mois et le lundi qui le précede
-        // Puis faire pareil pour le dernier jour, car il pourrait être un dimanche
+        // Gets the number of days between the first day of the month and the monday of the same week, same for the last day
         // add to start from prev month
         const lastMonth = date.subtract(1, "month");
         for (let i = 0; i <= daysToFirstOfTheMonth; i++) {
