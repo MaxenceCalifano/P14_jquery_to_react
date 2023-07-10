@@ -4,6 +4,8 @@ import '../css/home.module.css'
 import { Modal } from "my-modal-maxencec"
 import "my-modal-maxencec/dist/style.css"
 import { useState } from "react";
+import Datepicker from "../components/Datepicker";
+
 function Home() {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -41,6 +43,7 @@ function Home() {
             <main>
                 <Link to={'/employee-list'}>View Current Employees</Link>
                 <h2>Create Employee</h2>
+                <Datepicker />
                 <form>
 
                     <label htmlFor="first-name">First Name</label>
