@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useCallback, useMemo, useState } from "react";
 import PropTypes from 'prop-types'
+import styles from '../css/datepicker.module.css'
 import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 import weekday from 'dayjs/plugin/weekday'
 import 'dayjs/locale/fr'
@@ -68,7 +69,7 @@ function Datepicker({ selectedDate, setSelectedDate }) {
             <thead>
                 <tr>
                     <th colSpan={7}>
-                        <div>
+                        <div className={styles.calendar_header}>
                             <GrCaretPrevious onClick={() => setDate(date.clone().subtract(1, "month"))} />
                             {date.format("MMM YYYY")}
                             <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
@@ -91,7 +92,7 @@ function Datepicker({ selectedDate, setSelectedDate }) {
                     rows.map((cells, rowIndex) => (
                         <tr key={rowIndex}>
                             {cells.map(({ text, value }, cellIndex) => (
-                                <td key={cellIndex} onClick={() => setSelectedDate(value)}>{text}</td>
+                                <td className={styles.cell} key={cellIndex} onClick={() => setSelectedDate(value)}>{text}</td>
                             ))}
                         </tr>
                     ))
