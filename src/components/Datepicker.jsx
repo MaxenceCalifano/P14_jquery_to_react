@@ -91,7 +91,7 @@ function Datepicker({ selectedDate, setSelectedDate }) {
                     rows.map((cells, rowIndex) => (
                         <tr key={rowIndex}>
                             {cells.map(({ text, value }, cellIndex) => (
-                                <td key={cellIndex} onClick={() => console.log(value)}>{text}</td>
+                                <td key={cellIndex} onClick={() => setSelectedDate(value)}>{text}</td>
                             ))}
                         </tr>
                     ))

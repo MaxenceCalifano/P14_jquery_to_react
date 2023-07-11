@@ -56,7 +56,7 @@ function Home() {
                     <input onChange={e => setDateOfBirth(e.target.value)} id="date-of-birth" type="text" />
 
                     <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text" />
+                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} onChange={(e) => setStartDate(e.target.value)} />
 
                     <fieldset className="address">
                         <legend>Address</legend>
