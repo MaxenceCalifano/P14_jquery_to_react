@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useCallback, useMemo } from "react";
 import PropTypes from 'prop-types'
+import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 import weekday from 'dayjs/plugin/weekday'
 import 'dayjs/locale/fr'
 dayjs.extend(weekday)
@@ -9,7 +10,7 @@ dayjs.locale('fr')
 
 function Datepicker({ selectedDate, setSelectedDate }) {
     //simule la props
-    const date = dayjs().set('month', 0)// .set('date', 4) peu se chainer comme ça
+    //const date = dayjs().set('month', 0)// .set('date', 4) peu se chainer comme ça
 
     const getCalendarCells = date => {
         const daysToFirstOfTheMonth = date.date(1).weekday() - 1
@@ -46,8 +47,8 @@ function Datepicker({ selectedDate, setSelectedDate }) {
         return calendarCells
     }
 
-    const getCalendarRows = useCallback(date => {
-        const cells = getCalendarCells(date)
+    const getCalendarRows = useCallback(() => {
+        const cells = getCalendarCells(selectedDate)
 
         const rows = [];
 
@@ -58,22 +59,46 @@ function Datepicker({ selectedDate, setSelectedDate }) {
         console.log("🚀 ~ file: Datepicker.jsx:46 ~ getCalendarRows ~ rows:", rows)
 
         return rows;
-    }, [])
+    }, [selectedDate])
 
-    const rows = useMemo(() => getCalendarRows(date), [date, getCalendarRows])
+    const rows = useMemo(() => getCalendarRows(selectedDate), [selectedDate, getCalendarRows])
 
     return (
-        <div>
-            {
-                rows.map((cells, rowIndex) => (
-                    <div key={rowIndex}>
-                        {cells.map(({ text, value }, cellIndex) => (
-                            <div key={cellIndex} onClick={() => console.log(value)}>{text}</div>
-                        ))}
-                    </div>
-                ))
-            }
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th colSpan={7}>
+                        <div>
+                            <GrCaretPrevious />
+                            {selectedDate.format("MMM YYYY")}
+                            <GrCaretNext />
+                        </div>
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                    <th>Dimanche</th>
+                </tr>
+                {
+                    rows.map((cells, rowIndex) => (
+                        <tr key={rowIndex}>
+                            {cells.map(({ text, value }, cellIndex) => (
+                                <td key={cellIndex} onClick={() => console.log(value)}>{text}</td>
+                            ))}
+                        </tr>
+                    ))
+                }
+            </tbody>
+
+        </table>
     );
 }
 

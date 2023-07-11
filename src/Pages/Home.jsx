@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import '../css/home.module.css'
-
+import dayjs from "dayjs";
 import { Modal } from "my-modal-maxencec"
 import "my-modal-maxencec/dist/style.css"
 import { useState } from "react";
@@ -12,7 +12,7 @@ function Home() {
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [dateOfBirth, setDateOfBirth] = useState()
-    const [startDate, setStartDate] = useState()
+    const [startDate, setStartDate] = useState(dayjs())
     const [street, setStreet] = useState()
     const [city, setCity] = useState()
     const [state, setState] = useState()
@@ -43,7 +43,7 @@ function Home() {
             <main>
                 <Link to={'/employee-list'}>View Current Employees</Link>
                 <h2>Create Employee</h2>
-                <Datepicker />
+                <Datepicker selectedDate={startDate} setSelectedDate={setStartDate} />
                 <form>
 
                     <label htmlFor="first-name">First Name</label>
