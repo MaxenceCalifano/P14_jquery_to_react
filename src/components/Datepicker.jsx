@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import PropTypes from 'prop-types'
 import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 import weekday from 'dayjs/plugin/weekday'
@@ -9,8 +9,7 @@ dayjs.locale('fr')
 
 
 function Datepicker({ selectedDate, setSelectedDate }) {
-    //simule la props
-    //const date = dayjs().set('month', 0)// .set('date', 4) peu se chainer comme ça
+    const [date, setDate] = useState(selectedDate)
 
     const getCalendarCells = date => {
         const daysToFirstOfTheMonth = date.date(1).weekday() - 1
@@ -47,8 +46,9 @@ function Datepicker({ selectedDate, setSelectedDate }) {
         return calendarCells
     }
 
-    const getCalendarRows = useCallback(() => {
-        const cells = getCalendarCells(selectedDate)
+    const getCalendarRows = useCallback((date) => {
+
+        const cells = getCalendarCells(date)
 
         const rows = [];
 
@@ -59,9 +59,9 @@ function Datepicker({ selectedDate, setSelectedDate }) {
         console.log("🚀 ~ file: Datepicker.jsx:46 ~ getCalendarRows ~ rows:", rows)
 
         return rows;
-    }, [selectedDate])
+    }, [])
 
-    const rows = useMemo(() => getCalendarRows(selectedDate), [selectedDate, getCalendarRows])
+    const rows = useMemo(() => getCalendarRows(date), [date, getCalendarRows])
 
     return (
         <table>
@@ -69,9 +69,9 @@ function Datepicker({ selectedDate, setSelectedDate }) {
                 <tr>
                     <th colSpan={7}>
                         <div>
-                            <GrCaretPrevious />
-                            {selectedDate.format("MMM YYYY")}
-                            <GrCaretNext />
+                            <GrCaretPrevious onClick={() => setDate(date.clone().subtract(1, "month"))} />
+                            {date.format("MMM YYYY")}
+                            <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
                         </div>
                     </th>
                 </tr>
