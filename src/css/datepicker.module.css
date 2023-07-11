@@ -8,3 +8,7 @@
     cursor: pointer;
     text-align: center;
 }
+
+.cell:hover {
+    background-color: #FF8000;
+}
