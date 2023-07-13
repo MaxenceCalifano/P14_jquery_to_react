@@ -12,7 +12,7 @@ dayjs.locale('fr')
 function Datepicker({ selectedDate, setSelectedDate }) {
     const [date, setDate] = useState(selectedDate)
 
-    const getCalendarCells = date => {
+    const getCalendarCells = useCallback(date => {
         const daysToFirstOfTheMonth = date.date(1).weekday() - 1
 
         const calendarCells = []
@@ -45,61 +45,35 @@ function Datepicker({ selectedDate, setSelectedDate }) {
         }
         //const dateClone = date.clone().set('date', 12)
         return calendarCells
-    }
-
-    const getCalendarRows = useCallback((date) => {
-
-        const cells = getCalendarCells(date)
-
-        const rows = [];
-
-        // split one array into chunks
-        for (let i = 0; i < cells.length; i += 7) {
-            rows.push(cells.slice(i, i + 7));
-        }
-        console.log("🚀 ~ file: Datepicker.jsx:46 ~ getCalendarRows ~ rows:", rows)
-
-        return rows;
     }, [])
 
-    const rows = useMemo(() => getCalendarRows(date), [date, getCalendarRows])
+    const cells = useMemo(() => getCalendarCells(date), [date, getCalendarCells])
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th colSpan={7}>
-                        <div className={styles.calendar_header}>
-                            <GrCaretPrevious onClick={() => setDate(date.clone().subtract(1, "month"))} />
-                            {date.format("MMM YYYY")}
-                            <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
-                        </div>
-                    </th>
-                </tr>
+        <div className={styles.calendar}>
+            <div className={styles.calendar_header}>
+                <GrCaretPrevious onClick={() => setDate(date.clone().subtract(1, "month"))} />
+                {date.format("MMM YYYY")}
+                <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
+            </div>
 
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Lundi</th>
-                    <th>Mardi</th>
-                    <th>Mercredi</th>
-                    <th>Jeudi</th>
-                    <th>Vendredi</th>
-                    <th>Samedi</th>
-                    <th>Dimanche</th>
-                </tr>
-                {
-                    rows.map((cells, rowIndex) => (
-                        <tr key={rowIndex}>
-                            {cells.map(({ text, value }, cellIndex) => (
-                                <td className={styles.cell} key={cellIndex} onClick={() => setSelectedDate(value)}>{text}</td>
-                            ))}
-                        </tr>
-                    ))
-                }
-            </tbody>
+            <div>Lundi</div>
+            <div>Mardi</div>
+            <div>Mercredi</div>
+            <div>Jeudi</div>
+            <div>Vendredi</div>
+            <div>Samedi</div>
+            <div>Dimanche</div>
 
-        </table>
+            {
+                cells.map((cell, cellIndex) => (
+
+                    <div className={styles.cell} key={cellIndex} onClick={() => setSelectedDate(cell.value)}>{cell.text}</div>
+                ))
+            }
+
+
+        </div>
     );
 }
 

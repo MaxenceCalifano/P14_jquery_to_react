@@ -1,7 +1,15 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    justify-items: center;
+}
+
 .calendar_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    grid-column: 1 / 8;
 }
 
 .cell {
