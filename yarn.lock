@@ -1395,10 +1395,10 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-my-modal-maxencec@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/my-modal-maxencec/-/my-modal-maxencec-0.0.6.tgz#2db3a7b3a989214f2351dcd0f834c801c8f56c88"
-  integrity sha512-88zmtGxijc6rXOVF0NDXJJvcp6hE9DWWZwra0ae11HIhUZy0Mh3KzWSR0VqX41WzTTa7xwRbhQtIIEBKuZKWWA==
+my-modal-maxencec@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/my-modal-maxencec/-/my-modal-maxencec-0.1.1.tgz#000997c285eb21485c179785f5b7a958d5685402"
+  integrity sha512-PU6cLGmAOJV3dEtWUnTwpje4yw9Dv1xUxbPjgb8IberBVouIhr0t1hZstKsoB8SCuBMVfn2vy4/++8AMxpk3oA==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"

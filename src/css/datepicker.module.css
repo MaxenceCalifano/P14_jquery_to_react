@@ -5,13 +5,12 @@
     justify-items: center;
     border: 1px solid black;
     grid-gap: 1px;
-    background-color: black;
+    padding: 10px;
 }
 
 .calendar div {
     /* border: 1px solid black;*/
     width: 100%;
-    background-color: white;
 }
 
 .calendar_header {
@@ -25,6 +24,23 @@
 .cell {
     cursor: pointer;
     text-align: center;
+    background-color: rgb(240, 240, 240);
+    border-bottom: 1px rgb(220, 220, 220) solid;
+    border-right: 1px rgb(220, 220, 220) solid;
+}
+
+.daysOfWeek {
+    border: 1px rgb(220, 220, 220) solid;
+    border-bottom: none;
+}
+
+.selectedCell {
+    background-color: #33aaff;
+    color: white;
+}
+
+.todayCell {
+    font-weight: bolder;
 }
 
 .cell:hover {

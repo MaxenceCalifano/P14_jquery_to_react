@@ -72,19 +72,24 @@ function Datepicker({ selectedDate, setSelectedDate, isOpen, setIsOpen }) {
                         <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
                     </div>
 
-                    <div>Lundi</div>
-                    <div>Mardi</div>
-                    <div>Mercredi</div>
-                    <div>Jeudi</div>
-                    <div>Vendredi</div>
-                    <div>Samedi</div>
-                    <div>Dimanche</div>
+                    <div className={styles.daysOfWeek}>Lun</div>
+                    <div className={styles.daysOfWeek}>Mar</div>
+                    <div className={styles.daysOfWeek}>Mer</div>
+                    <div className={styles.daysOfWeek}>Jeu</div>
+                    <div className={styles.daysOfWeek}>Ven</div>
+                    <div className={styles.daysOfWeek}>Sam</div>
+                    <div className={styles.daysOfWeek}>Dim</div>
 
                     {
                         cells.map((cell, cellIndex) => (
 
-                            <div className={styles.cell} key={cellIndex} onClick={() => setSelectedDate(cell.value)}>{cell.text}</div>
-                        ))
+                            <div className={`${styles.cell} ${selectedDate.format() === cell.value.format() ? styles.selectedCell : ''} ${dayjs().format('DD-MM') === cell.value.format('DD-MM') ? styles.todayCell : ''}`}
+                                key={cellIndex}
+                                onClick={() => setSelectedDate(cell.value)}>
+                                {cell.text}
+                            </div>
+                        )
+                        )
                     }
                 </div> : null
             }
