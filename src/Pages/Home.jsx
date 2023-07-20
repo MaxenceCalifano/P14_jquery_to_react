@@ -8,7 +8,7 @@ import Datepicker from "../components/Datepicker";
 
 function Home() {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [modalIsOpen, setModalIsOpen] = useState(false)
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [dateOfBirth, setDateOfBirth] = useState()
@@ -18,6 +18,7 @@ function Home() {
     const [state, setState] = useState()
     const [zipCode, setZipCode] = useState()
     const [department, setDepartment] = useState()
+    const [calendarIsOpen, setCalendarIsOpen] = useState(false)
 
     const saveEmployee = () => {
 
@@ -35,7 +36,7 @@ function Home() {
         };
         employees.push(employee);
         localStorage.setItem('employees', JSON.stringify(employees));
-        setIsOpen(true)
+        setModalIsOpen(true)
     }
     return (
         <div>
@@ -43,7 +44,6 @@ function Home() {
             <main>
                 <Link to={'/employee-list'}>View Current Employees</Link>
                 <h2>Create Employee</h2>
-                <Datepicker selectedDate={startDate} setSelectedDate={setStartDate} />
                 <form>
 
                     <label htmlFor="first-name">First Name</label>
@@ -56,7 +56,8 @@ function Home() {
                     <input onChange={e => setDateOfBirth(e.target.value)} id="date-of-birth" type="text" />
 
                     <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} onChange={(e) => setStartDate(e.target.value)} />
+                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} onChange={(e) => setStartDate(e.target.value)} onClick={(event) => { event.stopPropagation(); setCalendarIsOpen(calendarIsOpen => !calendarIsOpen) }} />
+                    <Datepicker isOpen={calendarIsOpen} setIsOpen={setCalendarIsOpen} selectedDate={startDate} setSelectedDate={setStartDate} />
 
                     <fieldset className="address">
                         <legend>Address</legend>
@@ -84,7 +85,7 @@ function Home() {
                     </select>
                 </form>
                 <button onClick={saveEmployee}>Save</button>
-                <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+                <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
 
             </main>
         </div>
