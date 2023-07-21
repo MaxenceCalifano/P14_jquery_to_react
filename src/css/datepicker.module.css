@@ -21,6 +21,10 @@
     width: 100%;
 }
 
+.arrow {
+    cursor: pointer;
+}
+
 .cell {
     cursor: pointer;
     text-align: center;

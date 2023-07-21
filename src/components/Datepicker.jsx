@@ -63,18 +63,17 @@ function Datepicker({ selectedDate, setSelectedDate, isOpen, setIsOpen }) {
     }, [setIsOpen, ref])
 
     const numberOfMonths = Array.from(Array(12).keys())
-    const numberOfYears = Array.from(Array(117).keys())
+    const numberOfYears = Array.from(Array(144).keys())
 
     return (
         <>
             {
                 isOpen ? <div className={styles.calendar} ref={ref}>
                     <div className={styles.calendar_header}>
-                        <GrCaretPrevious onClick={() => setDate(date => date.clone().subtract(1, "month"))} />
-                        {/* Reset the to prevent dayjs setting next year  */}
+                        <GrCaretPrevious className={styles.arrow} onClick={() => setDate(date => date.clone().subtract(1, "month"))} />
                         <select name="month"
                             value={date.month()}
-                            onChange={(e) => setDate(date => date.clone().set('month', e.target.value).set('year', date.year()))}>
+                            onChange={(e) => setDate(date => date.clone().set('month', e.target.value))}>
                             {
                                 numberOfMonths.map((key) => <option
                                     key={key}
@@ -90,14 +89,14 @@ function Datepicker({ selectedDate, setSelectedDate, isOpen, setIsOpen }) {
                             {
                                 numberOfYears.map((key) => <option
                                     key={key}
-                                    value={dayjs().subtract(key, "year").format('YYYY')}>
+                                    value={dayjs().year(2050).subtract(key, "year").format('YYYY')}>
 
-                                    {dayjs().subtract(key, "year").format('YYYY')}
+                                    {dayjs().year(2050).subtract(key, "year").format('YYYY')}
                                 </option>)
                             }
                         </select>
                         {date.format("MMM YYYY")}
-                        <GrCaretNext onClick={() => setDate(date.clone().add(1, "month"))} />
+                        <GrCaretNext className={styles.arrow} onClick={() => setDate(date.clone().add(1, "month"))} />
                     </div>
 
                     <div className={styles.daysOfWeek}>Lun</div>
