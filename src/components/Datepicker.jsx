@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import PropTypes from 'prop-types'
 import styles from '../css/datepicker.module.css'
-import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
+import { GrCaretPrevious, GrCaretNext, GrHomeRounded } from "react-icons/gr";
 import weekday from 'dayjs/plugin/weekday'
 import 'dayjs/locale/fr'
 dayjs.extend(weekday)
@@ -71,31 +71,33 @@ function Datepicker({ selectedDate, setSelectedDate, isOpen, setIsOpen }) {
                 isOpen ? <div className={styles.calendar} ref={ref}>
                     <div className={styles.calendar_header}>
                         <GrCaretPrevious className={styles.arrow} onClick={() => setDate(date => date.clone().subtract(1, "month"))} />
-                        <select name="month"
-                            value={date.month()}
-                            onChange={(e) => setDate(date => date.clone().set('month', e.target.value))}>
-                            {
-                                numberOfMonths.map((key) => <option
-                                    key={key}
-                                    value={key}>
+                        <GrHomeRounded onClick={() => setDate(dayjs())} />
+                        <div className={styles.selectWrapper}>
+                            <select name="month"
+                                value={date.month()}
+                                onChange={(e) => setDate(date => date.clone().set('month', e.target.value))}>
+                                {
+                                    numberOfMonths.map((key) => <option
+                                        key={key}
+                                        value={key}>
 
-                                    {dayjs().month(key).format("MMM")}
-                                </option>
-                                )
-                            }
-                        </select>
+                                        {dayjs().month(key).format("MMM")}
+                                    </option>
+                                    )
+                                }
+                            </select>
 
-                        <select name="year" value={date.year()} onChange={(e) => setDate(date => date.clone().set('year', e.target.value))}>
-                            {
-                                numberOfYears.map((key) => <option
-                                    key={key}
-                                    value={dayjs().year(2050).subtract(key, "year").format('YYYY')}>
+                            <select name="year" value={date.year()} onChange={(e) => setDate(date => date.clone().set('year', e.target.value))}>
+                                {
+                                    numberOfYears.map((key) => <option
+                                        key={key}
+                                        value={dayjs().year(2050).subtract(key, "year").format('YYYY')}>
 
-                                    {dayjs().year(2050).subtract(key, "year").format('YYYY')}
-                                </option>)
-                            }
-                        </select>
-                        {date.format("MMM YYYY")}
+                                        {dayjs().year(2050).subtract(key, "year").format('YYYY')}
+                                    </option>)
+                                }
+                            </select>
+                        </div>
                         <GrCaretNext className={styles.arrow} onClick={() => setDate(date.clone().add(1, "month"))} />
                     </div>
 

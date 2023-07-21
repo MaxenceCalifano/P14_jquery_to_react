@@ -38,6 +38,7 @@ function Home() {
         localStorage.setItem('employees', JSON.stringify(employees));
         setModalIsOpen(true)
     }
+
     return (
         <div>
             <h1>HRnet</h1>
@@ -56,7 +57,7 @@ function Home() {
                     <input onChange={e => setDateOfBirth(e.target.value)} id="date-of-birth" type="text" />
 
                     <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} onChange={(e) => setStartDate(e.target.value)} onClick={(event) => { event.stopPropagation(); setCalendarIsOpen(calendarIsOpen => !calendarIsOpen) }} />
+                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} readOnly onClick={(event) => { event.stopPropagation(); setCalendarIsOpen(calendarIsOpen => !calendarIsOpen) }} />
                     <Datepicker isOpen={calendarIsOpen} setIsOpen={setCalendarIsOpen} selectedDate={startDate} setSelectedDate={setStartDate} />
 
                     <fieldset className="address">

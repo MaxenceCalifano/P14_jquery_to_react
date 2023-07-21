@@ -6,6 +6,8 @@
     border: 1px solid black;
     grid-gap: 1px;
     padding: 10px;
+    position: absolute;
+    background-color: whitesmoke;
 }
 
 .calendar div {
@@ -23,6 +25,11 @@
 
 .arrow {
     cursor: pointer;
+}
+
+.selectWrapper {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .cell {
