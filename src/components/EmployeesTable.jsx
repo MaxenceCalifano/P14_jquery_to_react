@@ -8,15 +8,25 @@ function EmployeeTable({ data, columns }) {
     const [dataLength, setDataLength] = useState(10)
     const [pagination, setPagination] = useState(0)
     const [numberOfPages, setNumberOfPages] = useState(1)
+    // une variable intermédiaire pour le tri
+    const [sortedData, setSortedData] = useState(data)
 
     useEffect(() => {
         if (data) {
-            setEmployees(data.slice(0, dataLength))
+            setSortedData(data)
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (sortedData) {
+            console.log("🚀 ~ file: EmployeesTable.jsx:22 ~ useEffect ~ sortedData:", sortedData)
+
+            setEmployees(sortedData.slice(0, dataLength))
 
             // Build an array of number of pages length so we can map on it to create the pagination buttons
-            setNumberOfPages(Array.from({ length: Math.ceil(data.length / dataLength) }))
+            setNumberOfPages(Array.from({ length: Math.ceil(sortedData.length / dataLength) }))
         }
-    }, [data, dataLength])
+    }, [dataLength, sortedData])
 
     const search = (e) => {
         const userInput = e.target.value
@@ -71,8 +81,8 @@ function EmployeeTable({ data, columns }) {
                                     index={index}
                                     selectedColumn={selectedColumn}
                                     setSelectedColumn={setSelectedColumn}
-                                    setEmployees={setEmployees}
-                                    employees={employees}
+                                    setEmployees={setSortedData}
+                                    employees={sortedData}
                                     columns={columns} />)
                                     // au clique déclencher la fonction sort en lui passant l'index de la column cliqué
                                     // ainsi dans la fonction on veut savoir quelle données trier
@@ -101,7 +111,7 @@ function EmployeeTable({ data, columns }) {
                                     console.log(data.slice(key * dataLength, key * dataLength))
                                     console.log(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength))
                                     setPagination(key)
-                                    setEmployees(data.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
+                                    setEmployees(sortedData.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
                                     // En fonction de la page où on se trouve, on veut employees avec la longueur de data length
                                     /**
                                      * pour 25

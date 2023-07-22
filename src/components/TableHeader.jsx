@@ -41,8 +41,6 @@ function TableHeader({ title,
         })
 
         setEmployees(data)
-        //console.log('test', data[0][columns[columnIndex].data])
-        console.log(data)
     }
 
     return (
