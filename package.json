@@ -13,6 +13,7 @@
     "dayjs": "^1.11.9",
     "my-modal-maxencec": "^0.1.1",
     "react": "^18.2.0",
+    "react-date-picker-mc": "^0.0.9",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.2"

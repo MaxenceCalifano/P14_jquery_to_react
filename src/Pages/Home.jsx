@@ -4,14 +4,18 @@ import dayjs from "dayjs";
 import { Modal } from "my-modal-maxencec"
 import "my-modal-maxencec/dist/style.css"
 import { useState } from "react";
-import Datepicker from "../components/Datepicker";
+//import Datepicker from "../components/Datepicker";
+import { Datepicker } from 'react-date-picker-mc'
+import "react-date-picker-mc/dist/style.css"
+import weekday from 'dayjs/plugin/weekday'
+dayjs.extend(weekday)
 
 function Home() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
-    const [dateOfBirth, setDateOfBirth] = useState()
+    const [dateOfBirth, setDateOfBirth] = useState(dayjs())
     const [startDate, setStartDate] = useState(dayjs())
     const [street, setStreet] = useState()
     const [city, setCity] = useState()
@@ -19,6 +23,7 @@ function Home() {
     const [zipCode, setZipCode] = useState()
     const [department, setDepartment] = useState()
     const [calendarIsOpen, setCalendarIsOpen] = useState(false)
+    const [startDateCalendar, setStartDateCalendar] = useState(false)
 
     const saveEmployee = () => {
 
@@ -54,11 +59,13 @@ function Home() {
                     <input onChange={e => setLastName(e.target.value)} type="text" id="last-name" />
 
                     <label htmlFor="date-of-birth">Date of Birth</label>
-                    <input onChange={e => setDateOfBirth(e.target.value)} id="date-of-birth" type="text" />
+                    <input readOnly value={dateOfBirth.format('DD/MM/YYYY')} id="date-of-birth" type="text" onClick={(event) => { event.stopPropagation(); setCalendarIsOpen(calendarIsOpen => !calendarIsOpen) }} />
+                    <Datepicker isOpen={calendarIsOpen} setIsOpen={setCalendarIsOpen} selectedDate={dateOfBirth} setSelectedDate={setDateOfBirth} />
+
 
                     <label htmlFor="start-date">Start Date</label>
-                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} readOnly onClick={(event) => { event.stopPropagation(); setCalendarIsOpen(calendarIsOpen => !calendarIsOpen) }} />
-                    <Datepicker isOpen={calendarIsOpen} setIsOpen={setCalendarIsOpen} selectedDate={startDate} setSelectedDate={setStartDate} />
+                    <input id="start-date" type="text" value={startDate.format('DD/MM/YYYY')} readOnly onClick={(event) => { event.stopPropagation(); setStartDateCalendar(calendarIsOpen => !calendarIsOpen) }} />
+                    <Datepicker isOpen={startDateCalendar} setIsOpen={setStartDateCalendar} selectedDate={startDate} setSelectedDate={setStartDate} />
 
                     <fieldset className="address">
                         <legend>Address</legend>
