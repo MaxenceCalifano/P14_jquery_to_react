@@ -28,10 +28,10 @@ function Table({ initialData, columns }) {
 
     const search = (e) => {
         const userInput = e.target.value
-        if (userInput.length === 0) setData(initialData)
+        if (userInput.length === 0) setData(sortedData.slice(0, dataLength))
         if (userInput.length < 3) return
 
-        const filteredData = data.filter(employee => {
+        const filteredData = initialData.filter(employee => {
             if (Object.values(employee).some(elem => elem.includes(userInput))) return true
         })
         setData(filteredData)
@@ -40,7 +40,6 @@ function Table({ initialData, columns }) {
     const selectLength = (e) => {
         const selectedValue = e.target.value
         setDataLength(selectedValue)
-
     }
 
     return (<>
