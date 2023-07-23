@@ -42,6 +42,11 @@ function Table({ initialData, columns }) {
         setDataLength(selectedValue)
     }
 
+    const paginate = (key) => {
+        setPagination(key)
+        setData(sortedData.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
+    }
+
     return (<>
 
         {
@@ -104,23 +109,19 @@ function Table({ initialData, columns }) {
                         <p>showing {pagination * dataLength + 1} to {pagination + 1 === numberOfPages.length ? initialData.length : parseInt(pagination * dataLength) + parseInt(dataLength)} of {initialData.length}</p>
                         {
                             numberOfPages.length > 1 ?
-                                numberOfPages.map((page, key) => <button onClick={() => {
-                                    console.log(initialData.slice(key * dataLength, key * dataLength))
-                                    console.log(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength))
-                                    setPagination(key)
-                                    setData(sortedData.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
-                                    // En fonction de la page où on se trouve, on veut data avec la longueur de data length
-                                    /**
-                                     * pour 25
-                                     * p1 1 à 25
-                                     * p2 26 à 50
-                                     * P3 51 à
-                                     * 
-                                     * pour 50 
-                                     * 1 à 50
-                                     * 51 à 100
-                                     */
-                                }} key={key}>{key + 1}</button>)
+                                <>
+                                    <button disabled={pagination === 0 ? true : false} className={styles.pagination_button} onClick={() => paginate(pagination - 1)}>Previous</button>
+                                    {
+                                        numberOfPages.map((page, key) =>
+                                            <button
+                                                className={`${styles.pagination_button} ${pagination === key ? styles.current_page : ''} ${styles.pagination_number}`}
+                                                onClick={() => {
+                                                    paginate(key)
+                                                }}
+                                                key={key}>{key + 1}</button>)
+                                    }
+                                    <button disabled={pagination + 1 === numberOfPages.length ? true : false} className={styles.pagination_button} onClick={() => paginate(pagination + 1)}>Next</button>
+                                </>
                                 : <></>
                         }
                     </div>

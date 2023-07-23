@@ -14,3 +14,23 @@ th {
     display: flex;
     gap: 5px;
 }
+
+.pagination_button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.pagination_button:hover {
+    background-color: #454545;
+    border-color: #454545;
+}
+
+.pagination_number {
+    border: none;
+    background: none;
+}
+
+.current_page {
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);
+    border: 1px solid #979797;
+}
