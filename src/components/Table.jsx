@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import styles from "../css/EmployeesTable.module.css"
+import styles from "../css/table.module.css"
 import TableHeader from './TableHeader';
 function Table({ initialData, columns }) {
     const [data, setData] = useState()
@@ -105,11 +105,11 @@ function Table({ initialData, columns }) {
                             }
                         </tbody>
                     </table>
-                    <div>
+                    <div className={styles.pagination}>
                         <p>showing {pagination * dataLength + 1} to {pagination + 1 === numberOfPages.length ? initialData.length : parseInt(pagination * dataLength) + parseInt(dataLength)} of {initialData.length}</p>
                         {
                             numberOfPages.length > 1 ?
-                                <>
+                                <div>
                                     <button disabled={pagination === 0 ? true : false} className={styles.pagination_button} onClick={() => paginate(pagination - 1)}>Previous</button>
                                     {
                                         numberOfPages.map((page, key) =>
@@ -121,7 +121,7 @@ function Table({ initialData, columns }) {
                                                 key={key}>{key + 1}</button>)
                                     }
                                     <button disabled={pagination + 1 === numberOfPages.length ? true : false} className={styles.pagination_button} onClick={() => paginate(pagination + 1)}>Next</button>
-                                </>
+                                </div>
                                 : <></>
                         }
                     </div>

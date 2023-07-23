@@ -15,22 +15,41 @@ th {
     gap: 5px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .pagination_button {
     padding: 0.5em 1em;
     cursor: pointer;
 }
 
+
+
 .pagination_button:hover {
     background-color: #454545;
     border-color: #454545;
+    color: whitesmoke;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }
 
 .pagination_number {
     border: none;
     background: none;
+    margin: 2px;
 }
 
 .current_page {
     background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);
     border: 1px solid #979797;
+    color: black;
+}
+
+.current_page:hover {
+    color: black;
 }
