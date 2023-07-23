@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Table from "../components/Table";
 
 import { useEffect, useState } from "react";
@@ -27,6 +28,7 @@ function EmployeeList() {
                 { title: "State", data: "state" },
                 { title: "Zip Code", data: "zipCode" }
             ]} />
+            <Link style={{ display: "block", textAlign: "center" }} to="/" >Home</Link>
         </>
     );
 }
