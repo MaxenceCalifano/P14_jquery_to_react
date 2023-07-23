@@ -1914,6 +1914,15 @@ react-router@6.13.0:
   dependencies:
     "@remix-run/router" "1.6.3"
 
+react-table-mc@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-table-mc/-/react-table-mc-0.0.1.tgz#fff541257f98190d5b772a60e15e6dd5b40dc54a"
+  integrity sha512-86JzUbjr43Kq5AjSxDRHrD9XoWPafHg2jl2zOP0gb7ozVi6QN8Jbtlqa8iEgXQAW31j67pzUOF5aplOpW5Vzqg==
+  dependencies:
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    vite-plugin-dts "^3.3.1"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
