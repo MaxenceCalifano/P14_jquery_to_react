@@ -1,4 +1,4 @@
-import EmployeeTable from "../components/EmployeesTable";
+import Table from "../components/Table";
 
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ function EmployeeList() {
             <h1>
                 Current Employees
             </h1>
-            <EmployeeTable data={data} columns={[
+            <Table initialData={data} columns={[
                 { title: "First Name", data: "firstName" },
                 { title: "Last Name", data: "lastName" },
                 { title: "Start Date", data: "startDate" },

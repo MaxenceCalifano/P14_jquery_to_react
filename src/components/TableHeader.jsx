@@ -7,8 +7,8 @@ function TableHeader({ title,
     index,
     selectedColumn,
     setSelectedColumn,
-    employees,
-    setEmployees,
+    sortedData,
+    setSortedData,
     columns }) {
     const [ascending, setAscending] = useState(false)
 
@@ -20,7 +20,7 @@ function TableHeader({ title,
         // save which column is selected, so the others are unselected
         setSelectedColumn(columnIndex)
         // Create a copy of the state to work on it, so react will notice that the object has changed
-        const data = [...employees]
+        const data = [...sortedData]
 
         console.log(ascending)
         data.sort((a, b) => {
@@ -40,7 +40,7 @@ function TableHeader({ title,
 
         })
 
-        setEmployees(data)
+        setSortedData(data)
     }
 
     return (
@@ -73,8 +73,8 @@ TableHeader.propTypes = {
     index: PropTypes.number,
     selectedColumn: PropTypes.number,
     setSelectedColumn: PropTypes.func,
-    employees: PropTypes.array,
-    setEmployees: PropTypes.func,
+    sortedData: PropTypes.array,
+    setSortedData: PropTypes.func,
     columns: PropTypes.array
 }
 

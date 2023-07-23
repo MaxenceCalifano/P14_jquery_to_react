@@ -2,26 +2,24 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import styles from "../css/EmployeesTable.module.css"
 import TableHeader from './TableHeader';
-function EmployeeTable({ data, columns }) {
-    const [employees, setEmployees] = useState()
+function Table({ initialData, columns }) {
+    const [data, setData] = useState()
     const [selectedColumn, setSelectedColumn] = useState()
     const [dataLength, setDataLength] = useState(10)
     const [pagination, setPagination] = useState(0)
     const [numberOfPages, setNumberOfPages] = useState(1)
     // une variable intermédiaire pour le tri
-    const [sortedData, setSortedData] = useState(data)
+    const [sortedData, setSortedData] = useState(initialData)
 
     useEffect(() => {
-        if (data) {
-            setSortedData(data)
+        if (initialData) {
+            setSortedData(initialData)
         }
-    }, [data])
+    }, [initialData])
 
     useEffect(() => {
         if (sortedData) {
-            console.log("🚀 ~ file: EmployeesTable.jsx:22 ~ useEffect ~ sortedData:", sortedData)
-
-            setEmployees(sortedData.slice(0, dataLength))
+            setData(sortedData.slice(0, dataLength))
 
             // Build an array of number of pages length so we can map on it to create the pagination buttons
             setNumberOfPages(Array.from({ length: Math.ceil(sortedData.length / dataLength) }))
@@ -30,13 +28,13 @@ function EmployeeTable({ data, columns }) {
 
     const search = (e) => {
         const userInput = e.target.value
-        if (userInput.length === 0) setEmployees(data)
+        if (userInput.length === 0) setData(initialData)
         if (userInput.length < 3) return
 
-        const filteredEmployees = employees.filter(employee => {
+        const filteredData = data.filter(employee => {
             if (Object.values(employee).some(elem => elem.includes(userInput))) return true
         })
-        setEmployees(filteredEmployees)
+        setData(filteredData)
     }
 
     const selectLength = (e) => {
@@ -48,7 +46,7 @@ function EmployeeTable({ data, columns }) {
     return (<>
 
         {
-            employees ?
+            data ?
                 <>
                     <div className={styles.searchAndDataLength}>
                         {/* Select number of entries*/}
@@ -81,8 +79,8 @@ function EmployeeTable({ data, columns }) {
                                     index={index}
                                     selectedColumn={selectedColumn}
                                     setSelectedColumn={setSelectedColumn}
-                                    setEmployees={setSortedData}
-                                    employees={sortedData}
+                                    setData={setSortedData}
+                                    sortedData={sortedData}
                                     columns={columns} />)
                                     // au clique déclencher la fonction sort en lui passant l'index de la column cliqué
                                     // ainsi dans la fonction on veut savoir quelle données trier
@@ -92,7 +90,7 @@ function EmployeeTable({ data, columns }) {
                         <tbody>
                             {
                                 //  Create a row for each item in data
-                                employees.map((row, index) => (
+                                data.map((row, index) => (
                                     <tr key={index}>
                                         {
                                             // Create a column for each value in item
@@ -104,15 +102,15 @@ function EmployeeTable({ data, columns }) {
                         </tbody>
                     </table>
                     <div>
-                        <p>showing {pagination * dataLength + 1} to {pagination + 1 === numberOfPages.length ? data.length : parseInt(pagination * dataLength) + parseInt(dataLength)} of {data.length}</p>
+                        <p>showing {pagination * dataLength + 1} to {pagination + 1 === numberOfPages.length ? initialData.length : parseInt(pagination * dataLength) + parseInt(dataLength)} of {initialData.length}</p>
                         {
                             numberOfPages.length > 1 ?
                                 numberOfPages.map((page, key) => <button onClick={() => {
-                                    console.log(data.slice(key * dataLength, key * dataLength))
+                                    console.log(initialData.slice(key * dataLength, key * dataLength))
                                     console.log(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength))
                                     setPagination(key)
-                                    setEmployees(sortedData.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
-                                    // En fonction de la page où on se trouve, on veut employees avec la longueur de data length
+                                    setData(sortedData.slice(key * dataLength, parseInt(key * dataLength) + parseInt(dataLength)))
+                                    // En fonction de la page où on se trouve, on veut data avec la longueur de data length
                                     /**
                                      * pour 25
                                      * p1 1 à 25
@@ -133,12 +131,12 @@ function EmployeeTable({ data, columns }) {
     </>);
 }
 
-EmployeeTable.propTypes = {
-    data: PropTypes.array,
+Table.propTypes = {
+    initialData: PropTypes.array,
     columns: PropTypes.array,
     title: PropTypes.string,
     index: PropTypes.number,
     selectedColumn: PropTypes.number
 }
 
-export default EmployeeTable;
+export default Table;
