@@ -8,6 +8,8 @@ import { useState } from "react";
 import { Datepicker } from 'react-date-picker-mc'
 import "react-date-picker-mc/dist/style.css"
 import weekday from 'dayjs/plugin/weekday'
+import Select from "../components/Select";
+import { states } from "../components/states";
 dayjs.extend(weekday)
 
 function Home() {
@@ -76,21 +78,13 @@ function Home() {
                         <label htmlFor="city">City</label>
                         <input onChange={e => setCity(e.target.value)} id="city" type="text" />
 
-                        <label htmlFor="state">State</label>
-                        <select name="state" id="state"></select>
+                        <Select label="State" data={states} setData={setState} />
 
                         <label htmlFor="zip-code">Zip Code</label>
                         <input onChange={e => setZipCode(e.target.value)} id="zip-code" type="number" />
                     </fieldset>
 
-                    <label htmlFor="department">Department</label>
-                    <select onChange={e => setDepartment(e.target.value)} name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
+                    <Select label="Department" setData={setDepartment} data={["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]} />
                 </form>
                 <button onClick={saveEmployee}>Save</button>
                 <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
