@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-//import Table from "../components/Table";
 import { Table } from "react-table-mc"
 import "react-table-mc/dist/style.css"
 
@@ -7,7 +6,7 @@ import { useEffect, useState } from "react";
 
 function EmployeeList() {
 
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
 
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem('employees'))
