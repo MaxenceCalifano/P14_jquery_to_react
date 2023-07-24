@@ -1674,10 +1674,10 @@ muggle-string@^0.3.1:
   resolved "https://registry.yarnpkg.com/muggle-string/-/muggle-string-0.3.1.tgz#e524312eb1728c63dd0b2ac49e3282e6ed85963a"
   integrity sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==
 
-my-modal-maxencec@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/my-modal-maxencec/-/my-modal-maxencec-0.1.1.tgz#000997c285eb21485c179785f5b7a958d5685402"
-  integrity sha512-PU6cLGmAOJV3dEtWUnTwpje4yw9Dv1xUxbPjgb8IberBVouIhr0t1hZstKsoB8SCuBMVfn2vy4/++8AMxpk3oA==
+my-modal-maxencec@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/my-modal-maxencec/-/my-modal-maxencec-0.1.2.tgz#801f5ff3de0db792600b2f22bafcc2bd28bfc31e"
+  integrity sha512-A7EwRtT1dX9qSZir1c0K3b6uxLb6qK+Kmxdy4vfjqVvP5YKtNX+aroSjTc/x+z9eqEIPaKWfhbCfOVcoeWuNaw==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"

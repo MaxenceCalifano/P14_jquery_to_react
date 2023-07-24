@@ -87,7 +87,7 @@ function Home() {
                     <Select label="Department" setData={setDepartment} data={["Sales", "Marketing", "Engineering", "Human Resources", "Legal"]} />
                 </form>
                 <button onClick={saveEmployee}>Save</button>
-                <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} />
+                <Modal isOpen={modalIsOpen} setIsOpen={setModalIsOpen} text="Employee created!" />
 
             </main>
         </div>
