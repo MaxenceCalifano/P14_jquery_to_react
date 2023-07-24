@@ -33,8 +33,8 @@ function Home() {
         const employee = {
             firstName: firstName,
             lastName: lastName,
-            dateOfBirth: dateOfBirth,
-            startDate: startDate,
+            dateOfBirth: dateOfBirth.format('DD/MM/YYYY'),
+            startDate: startDate.format('DD/MM/YYYY'),
             department: department,
             street: street,
             city: city,
