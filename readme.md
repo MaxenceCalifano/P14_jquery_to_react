@@ -7,8 +7,8 @@ The project aimed to recreate an existing project which was originally written i
 One of the main goal was to choose one of the jquery plugin originaly used (date picker, table, select or modal) 
 and rewrite it in react and publishing it on as librairy on NPM, I rewrote all of them.
 
-![Static Badge](https://img.shields.io/badge/react-white?style=for-the-badge&logo=react&logoColor=61DAFB&color=181717) ➡️
-![Static Badge](https://img.shields.io/badge/jquery-black?style=for-the-badge&logo=jquery&logoColor=0769ADcolor=181717)
+![Static Badge](https://img.shields.io/badge/jquery-black?style=for-the-badge&logo=jquery&logoColor=0769ADcolor=181717) ➡️
+![Static Badge](https://img.shields.io/badge/react-white?style=for-the-badge&logo=react&logoColor=61DAFB&color=181717) 
 
 
 ## Features
