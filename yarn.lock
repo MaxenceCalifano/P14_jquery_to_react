@@ -1914,10 +1914,10 @@ react-router@6.13.0:
   dependencies:
     "@remix-run/router" "1.6.3"
 
-react-table-mc@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/react-table-mc/-/react-table-mc-0.0.12.tgz#5b3e2c6bf5c0757ebd1d17ce600ea39a044d6f98"
-  integrity sha512-m6TSp8xYNGIOEMAIfREbvhO1ZqTMLIi8RXVay5BoQ5rnOvBx853RTsDpfQy4VhKscigHpO+hb3/VaNv3UQGZtg==
+react-table-mc@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/react-table-mc/-/react-table-mc-0.0.13.tgz#cff5aca9fa4ce6520389041432ee4654da0d4335"
+  integrity sha512-gdQpbVTeU9LPGoGK4beY/n5h9cchJe6rf1F1ld/DnPdbivtfPOnG+NG9jLXJoLq0+aZAATulAgXY1U7J1srdig==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
